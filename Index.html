@@ -1,0 +1,674 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Onam Target</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+
+background:linear-gradient(135deg,#ff9800,#ff5722);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+
+}
+
+.overlay{
+
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.45);
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+padding:20px;
+
+}
+
+.popup{
+
+background:#fff;
+width:100%;
+max-width:380px;
+
+border-radius:20px;
+
+padding:30px 25px;
+
+text-align:center;
+
+animation:pop .35s;
+
+box-shadow:0 15px 40px rgba(0,0,0,.25);
+
+}
+
+@keyframes pop{
+
+from{
+
+transform:scale(.8);
+opacity:0;
+
+}
+
+to{
+
+transform:scale(1);
+opacity:1;
+
+}
+
+}
+
+.logo{
+
+font-size:60px;
+
+}
+
+h2{
+
+margin-top:10px;
+color:#ef6c00;
+font-size:28px;
+
+}
+
+.sub{
+
+color:#777;
+margin-top:8px;
+margin-bottom:25px;
+
+}
+
+input{
+
+width:100%;
+
+padding:16px;
+
+font-size:20px;
+
+border-radius:12px;
+
+border:2px solid #ddd;
+
+outline:none;
+
+transition:.3s;
+
+}
+
+input:focus{
+
+border-color:#ff9800;
+
+}
+
+button{
+
+margin-top:18px;
+
+width:100%;
+
+padding:15px;
+
+border:none;
+
+border-radius:12px;
+
+background:linear-gradient(90deg,#ff9800,#ff5722);
+
+color:#fff;
+
+font-size:18px;
+
+font-weight:600;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+button:hover{
+
+transform:translateY(-2px);
+
+}
+
+#loading{
+
+display:none;
+
+margin-top:20px;
+
+font-size:15px;
+
+color:#555;
+
+}
+
+.spinner{
+
+width:35px;
+height:35px;
+
+border:4px solid #ddd;
+
+border-top:4px solid #ff9800;
+
+border-radius:50%;
+
+margin:15px auto;
+
+animation:spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+100%{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+.dashboard{
+display:none;
+width:100%;
+max-width:450px;
+}
+
+@keyframes fade{
+
+from{
+
+opacity:0;
+transform:translateY(30px);
+
+}
+
+to{
+
+opacity:1;
+transform:translateY(0);
+
+}
+
+}
+
+.header{
+
+background:linear-gradient(90deg,#ff9800,#ff5722);
+
+color:#fff;
+
+padding:25px;
+
+text-align:center;
+
+border-radius:20px 20px 0 0;
+
+}
+
+.header h1{
+
+font-size:30px;
+
+}
+
+.card{
+
+background:#fff;
+
+border-radius:0 0 20px 20px;
+
+overflow:hidden;
+
+box-shadow:0 15px 35px rgba(0,0,0,.2);
+
+}
+
+.row{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:18px 20px;
+
+border-bottom:1px solid #eee;
+
+font-size:17px;
+
+}
+
+.row:last-child{
+
+border-bottom:none;
+
+}
+
+.value{
+
+font-size:20px;
+
+font-weight:700;
+
+}
+
+.target{
+
+color:#ff9800;
+
+}
+
+.achieved{
+
+color:#2e7d32;
+
+}
+
+.balance{
+
+color:#d32f2f;
+
+}
+
+.progressBox{
+
+padding:20px;
+
+}
+
+.progress{
+
+height:18px;
+
+background:#eee;
+
+border-radius:30px;
+
+overflow:hidden;
+
+}
+
+.bar{
+
+height:100%;
+
+width:0%;
+
+background:linear-gradient(90deg,#4caf50,#8bc34a);
+
+transition:1s;
+
+}
+
+.percent{
+
+text-align:center;
+
+margin-top:12px;
+
+font-size:18px;
+
+font-weight:600;
+
+color:#444;
+
+}
+
+.searchAgain{
+
+padding:25px;
+
+text-align:center;
+
+}
+
+.searchAgain button{
+
+max-width:250px;
+
+}
+
+#captureWrapper{
+    background:linear-gradient(135deg,#ff9800,#ff5722);
+    padding:15px;
+    width:100%;
+}
+
+#captureCard{
+    width:100%;
+    background:linear-gradient(135deg,#ff9800,#ff5722);
+    border-radius:15px;
+    overflow:hidden;
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+}
+
+.download-hide{
+    display:none !important;
+}
+@media(max-width:480px){
+
+.popup{
+
+padding:25px 18px;
+
+}
+
+.header h1{
+
+font-size:24px;
+
+}
+
+.row{
+
+font-size:15px;
+
+}
+
+.value{
+
+font-size:18px;
+
+}
+
+}
+
+  </style>
+
+</head>
+
+<body>
+
+<div class="overlay" id="popup">
+
+<div class="popup">
+
+<div class="logo">🌸</div>
+
+<h2>ഓണവിസ്മയം 2026</h2>
+
+<div class="sub">
+
+Enter your DMS Code
+
+</div>
+
+<input
+id="dms"
+placeholder="Enter DMS Code"
+autocomplete="off"
+onkeypress="if(event.key==='Enter')searchDMS()">
+
+<button onclick="searchDMS()">
+
+SEARCH
+
+</button>
+
+<div id="loading">
+
+<div class="spinner"></div>
+
+Loading...
+
+</div>
+
+</div>
+
+</div>
+
+<div class="dashboard" id="dashboard">
+<div id="captureWrapper">
+<div id="captureCard">
+
+<div class="header">
+
+<h1>ഓണവിസ്മയം 2026</h1>
+<div style="
+margin-top:12px;
+background:rgba(255,255,255,.18);
+padding:10px;
+border-radius:10px;
+font-size:15px;
+line-height:1.5;
+">
+
+<strong>Campaign Period</strong><br>
+
+16 Jul 2026 - 15 Sep 2026
+
+</div>
+
+</div>
+
+<div class="card">
+
+<div class="row">
+
+<div>Retailer Name</div>
+
+<div class="value" id="retailer"></div>
+
+</div>
+
+<div class="row">
+
+<div>🎯 Target</div>
+
+<div class="value target" id="target"></div>
+
+</div>
+
+<div class="row">
+
+<div>✅ Achieved</div>
+
+<div class="value achieved" id="achieved"></div>
+
+</div>
+
+<div class="row">
+
+<div>🔴 Balance</div>
+
+<div class="value balance" id="balance"></div>
+
+</div>
+
+<div class="progressBox">
+
+<div class="progress">
+
+<div class="bar" id="bar"></div>
+
+</div>
+
+<div class="percent" id="percent">
+
+0% Completed
+
+</div>
+
+</div>
+
+
+<div class="searchAgain">
+
+<button onclick="downloadCard()">
+📥 Download PNG
+</button>
+
+<button onclick="resetSearch()">
+🔍 Search Another DMS
+</button>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+
+
+
+<script>
+
+window.onload=()=>{
+
+document.getElementById("dms").focus();
+
+};
+
+
+
+function searchDMS(){
+
+const dms = document.getElementById("dms").value.trim();
+
+if(dms==""){
+    alert("Please enter DMS Code");
+    return;
+}
+
+document.getElementById("loading").style.display="block";
+
+fetch("https://script.google.com/macros/s/AKfycbxbkEsPkHVpq5MUYvi6Eg8n_dY6T7AJv1sMWpiaL84oB9zuHIlpiUHgclWubGho2X1A/exec?dms=" + encodeURIComponent(dms))
+.then(response => response.json())
+.then(showData)
+.catch(function(err){
+
+    document.getElementById("loading").style.display="none";
+    alert("Server Error");
+
+});
+
+}
+
+
+function showData(res){
+
+document.getElementById("loading").style.display="none";
+
+if(!res.success){
+
+alert(res.message);
+
+return;
+
+}
+
+document.getElementById("popup").style.display="none";
+
+document.getElementById("dashboard").style.display="block";
+
+document.getElementById("retailer").innerHTML=res.retailer;
+
+document.getElementById("target").innerHTML=res.target;
+
+document.getElementById("achieved").innerHTML=res.achieved;
+
+document.getElementById("balance").innerHTML=res.balance;
+
+let percent=0;
+
+if(res.target>0){
+
+percent=(res.achieved/res.target)*100;
+
+}
+
+if(percent>100){
+
+percent=100;
+
+}
+
+document.getElementById("bar").style.width=percent+"%";
+
+document.getElementById("percent").innerHTML=percent.toFixed(1)+"% Completed";
+
+}
+
+
+
+function resetSearch(){
+
+document.getElementById("dashboard").style.display="none";
+
+document.getElementById("popup").style.display="flex";
+
+document.getElementById("dms").value="";
+
+document.getElementById("dms").focus();
+
+}
+
+
+function downloadCard(){
+
+    const capture = document.getElementById("captureWrapper");
+    const buttons = document.querySelector(".searchAgain");
+
+    // Hide buttons
+    buttons.style.display = "none";
+
+    html2canvas(capture,{
+        scale:4,
+        useCORS:true,
+        backgroundColor:"#ff9800",
+        logging:false,
+        allowTaint:true
+    }).then(function(canvas){
+
+        // Show buttons again
+        buttons.style.display = "block";
+
+        const link=document.createElement("a");
+        link.download="Onam_Target_"+document.getElementById("retailer").innerText+".png";
+        link.href=canvas.toDataURL("image/png");
+        link.click();
+
+    });
+
+}
+
+
+</script>
+
+</body>
+</html>
