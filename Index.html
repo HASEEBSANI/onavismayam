@@ -567,7 +567,7 @@ if(dms==""){
 
 document.getElementById("loading").style.display="block";
 
-fetch("https://script.google.com/macros/s/AKfycbxbkEsPkHVpq5MUYvi6Eg8n_dY6T7AJv1sMWpiaL84oB9zuHIlpiUHgclWubGho2X1A/exec?dms=" + encodeURIComponent(dms))
+fetch("https://script.google.com/macros/s/AKfycbxbkEsPkHVpq5MUYvi6Eg8n_dY6T7AJv1sMWpiaL84oB9zuHIlpiUHgclWubGho2X1A/exec" + encodeURIComponent(dms))
 .then(response => response.json())
 .then(showData)
 .catch(function(err){
